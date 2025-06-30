@@ -1083,7 +1083,7 @@
                                 cornerRadius: 8,
                                 callbacks: {
                                     label: function(context) {
-                                        return context.dataset.label + ':  + context.parsed.y.toFixed(2) + '/MWh';
+                                        return context.dataset.label + ': $' + context.parsed.y.toFixed(2) + '/MWh';
                                     }
                                 }
                             }
@@ -1278,7 +1278,7 @@
                             tooltip: {
                                 callbacks: {
                                     label: function(context) {
-                                        return 'DA Price:  + context.parsed.y.toFixed(2) + '/MWh';
+                                        return 'DA Price: $' + context.parsed.y.toFixed(2) + '/MWh';
                                     }
                                 }
                             }
@@ -1560,8 +1560,8 @@
                         const changeElement = card.querySelector('.zone-change');
                         
                         if (priceElement) {
-                            const oldPrice = parseFloat(priceElement.textContent.replace(', ''));
-                            priceElement.textContent = ' + newPrice.toFixed(2);
+                            const oldPrice = parseFloat(priceElement.textContent.replace('$', ''));
+                            priceElement.textContent = '$' + newPrice.toFixed(2);
                             
                             const change = newPrice - oldPrice;
                             const changePercent = ((change / oldPrice) * 100).toFixed(1);
@@ -1569,10 +1569,10 @@
                             if (changeElement) {
                                 if (change > 0) {
                                     changeElement.className = 'zone-change positive';
-                                    changeElement.textContent = `+${change.toFixed(2)} (+${changePercent}%)`;
+                                    changeElement.textContent = `+$${change.toFixed(2)} (+${changePercent}%)`;
                                 } else {
                                     changeElement.className = 'zone-change negative';
-                                    changeElement.textContent = `${change.toFixed(2)} (${changePercent}%)`;
+                                    changeElement.textContent = `-$${Math.abs(change).toFixed(2)} (${changePercent}%)`;
                                 }
                             }
                         }
@@ -1583,13 +1583,13 @@
 
         function updateMetrics() {
             const metrics = {
-                'rtSystemAvg': { value: 65.42 + (Math.random() - 0.5) * 15, format: ', suffix: '' },
-                'daSystemAvg': { value: 58.30 + (Math.random() - 0.5) * 8, format: ', suffix: '' },
-                'peakRTPrice': { value: 125.80 + (Math.random() - 0.5) * 25, format: ', suffix: '' },
+                'rtSystemAvg': { value: 65.42 + (Math.random() - 0.5) * 15, format: '$', suffix: '' },
+                'daSystemAvg': { value: 58.30 + (Math.random() - 0.5) * 8, format: '$', suffix: '' },
+                'peakRTPrice': { value: 125.80 + (Math.random() - 0.5) * 25, format: '$', suffix: '' },
                 'systemDemand': { value: 42.8 + (Math.random() - 0.5) * 5, format: '', suffix: ' GW' },
                 'renewables': { value: 58.2 + (Math.random() - 0.5) * 8, format: '', suffix: '%' },
                 'solarOutput': { value: 14.5 + (Math.random() - 0.5) * 3, format: '', suffix: ' GW' },
-                'congestionCost': { value: 8.2 + (Math.random() - 0.5) * 2, format: ', suffix: 'M' },
+                'congestionCost': { value: 8.2 + (Math.random() - 0.5) * 2, format: '$', suffix: 'M' },
                 'gridReliability': { value: 99.7 + (Math.random() - 0.5) * 0.5, format: '', suffix: '%' }
             };
 
